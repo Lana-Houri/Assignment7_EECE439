@@ -1,0 +1,10 @@
+from django.urls import path
+from .views import home, create_contact, update_contact, delete_contact, success
+
+urlpatterns = [
+    path('', home, name='home'),
+    path('create/', create_contact, name='create_contact'),
+    path('update/<int:id>/', update_contact, name='update_contact'),
+    path('delete/<int:id>/', delete_contact, name='delete_contact'),
+    path('success/', success, name='success'),
+]

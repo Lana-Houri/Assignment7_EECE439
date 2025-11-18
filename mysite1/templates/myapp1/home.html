@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact List</title>
+    <style>
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #eee;
+        }
+        a {
+            margin-right: 10px;
+        }
+        .top-links {
+            width: 90%;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-links">
+    <h2>Contact List</h2>
+    <a href="/create/">➕ Add New Contact</a>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Rating</th>
+        <th>Fees</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for c in contacts %}
+    <tr>
+        <td>{{ c.full_name }}</td>
+        <td>{{ c.specialty }}</td>
+        <td>{{ c.city }}</td>
+        <td>{{ c.address }}</td>
+        <td>{{ c.rating }}</td>
+        <td>{{ c.fees }}</td>
+        <td>{{ c.phone }}</td>
+        <td>
+            <a href="/update/{{ c.id }}/">✏️ Edit</a>
+            <a href="/delete/{{ c.id }}/" onclick="return confirm('Delete this contact?');">🗑️ Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
