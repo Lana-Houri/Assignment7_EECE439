@@ -1,0 +1,40 @@
+<h2>Search Contacts</h2>
+
+<form method="GET" action="/search/">
+    <input type="text" name="q" placeholder="Search name, city or specialty">
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+{% if results %}
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>City</th>
+        <th>Fees</th>
+        <th>Rating</th>
+    </tr>
+
+    {% for r in results %}
+    <tr>
+        <td>{{ r.full_name }}</td>
+        <td>{{ r.specialty }}</td>
+        <td>{{ r.city }}</td>
+        <td>{{ r.fees }}</td>
+        <td>{{ r.rating }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<br><br>
+<a href="/" style="
+    display: inline-block;
+    padding: 8px 16px;
+    background: #eee;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+">⬅ Back to Home</a>

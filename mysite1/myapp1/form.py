@@ -8,3 +8,10 @@ class CreateContactForm(forms.Form):
     rating = forms.FloatField(required=False)
     fees = forms.IntegerField(required=False)
     phone = forms.CharField(label="Phone")
+
+class RecommendationForm(forms.Form):
+    specialty = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    max_fees = forms.IntegerField(required=False)
+    min_rating = forms.FloatField(required=False)
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot Assistant</title>
+</head>
+<body>
+
+<h1>AI Chatbot Assistant</h1>
+
+<div>
+    {% if messages %}
+        {% for m in messages %}
+            <p><strong>{{ m.from|title }}:</strong> {{ m.text }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <input 
+        type="text" 
+        name="message" 
+        placeholder="Ask me anything..." 
+        style="width: 80%; padding: 10px;"
+        required
+    >
+    <button type="submit">Send</button>
+</form>
+
+<br>
+<a href="/" style="color: purple;">⬅ Back to Home</a>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<h1>Doctor Recommendation Engine</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Specialty:</label>
+    <input type="text" name="specialty" placeholder="cardiology">
+
+    <br><br>
+
+    <label>City:</label>
+    <input type="text" name="city" placeholder="Chicago">
+
+    <br><br>
+
+    <label>Max fees:</label>
+    <input type="number" name="max_fees" placeholder="2000">
+
+    <br><br>
+
+    <label>Min rating:</label>
+    <input type="text" name="min_rating" placeholder="4.0">
+
+    <br><br>
+
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<h2>Results:</h2>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>City</th>
+        <th>Fees</th>
+        <th>Rating</th>
+        <th>Phone</th>
+    </tr>
+
+    {% for d in results %}
+        <tr>
+            <td>{{ d.full_name }}</td>
+            <td>{{ d.specialty }}</td>
+            <td>{{ d.city }}</td>
+            <td>{{ d.fees }}</td>
+            <td>{{ d.rating }}</td>
+            <td>{{ d.phone }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="6">No matching doctors.</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<a href="/">⬅ Back to Home</a>
