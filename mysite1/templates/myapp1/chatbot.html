@@ -55,6 +55,10 @@
             margin-right: auto;
         }
 
+        .msg-text {
+            margin-top: 6px;
+        }
+
         /* Input area */
         .input-row {
             display: flex;
@@ -104,6 +108,44 @@
         .back-btn:hover {
             background: #e7e7ff;
         }
+
+        .chat-card-list {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-card {
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #fbfbff;
+        }
+
+        .chat-card-name {
+            font-weight: 600;
+            color: #1d1f3f;
+        }
+
+        .chat-card-line {
+            font-size: 14px;
+            color: #444;
+            margin-top: 3px;
+        }
+
+        .chat-card-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #4a4fe4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .chat-card-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -117,7 +159,8 @@
         {% if messages %}
             {% for m in messages %}
                 <div class="msg {% if m.from == 'you' %}you{% else %}bot{% endif %}">
-                    <strong>{{ m.from|title }}:</strong> {{ m.text }}
+                    <strong>{{ m.from|title }}:</strong>
+                    <div class="msg-text">{{ m.text|safe }}</div>
                 </div>
             {% endfor %}
         {% endif %}

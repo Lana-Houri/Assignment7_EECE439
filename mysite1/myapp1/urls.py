@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, create_contact, update_contact, delete_contact, success, recommend, search, chatbot
+from .views import home, create_contact, update_contact, delete_contact, success, recommend, search, chatbot, contact_detail
 
 urlpatterns = [
     path('', home, name='home'),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('recommend/', recommend, name='recommend'),
     path('search/', search, name='search'),
     path("chatbot/", chatbot, name="chatbot"),
+    path("profile/<int:id>/", contact_detail, name="contact_detail"),
 
 ]

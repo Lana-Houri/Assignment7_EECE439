@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -60,6 +61,11 @@ def delete_contact(request, id):
 
 def success(request):
     return render(request, 'myapp1/success.html')
+
+
+def contact_detail(request, id):
+    contact = get_object_or_404(Contact, id=id)
+    return render(request, 'myapp1/contact_detail.html', {'contact': contact})
 
 # ---------------------------------------------------------
 # RECOMMENDATION PAGE
@@ -220,11 +226,22 @@ def chatbot(request):
         qs = run_doctor_query(filters)
 
         if qs.exists():
-            results = "\n".join([
-                f"- {d.full_name}, {d.specialty}, {d.city}, Fees: {d.fees}, Rating: {d.rating}"
-                for d in qs
+            cards_html = "".join([
+                f"""
+                <div class="chat-card">
+                    <div class="chat-card-name">{doc.full_name}</div>
+                    <div class="chat-card-line">{doc.specialty} • {doc.city}</div>
+                    <div class="chat-card-line">Fees: {doc.fees} | Rating: {doc.rating}</div>
+                    <a class="chat-card-link" href="{reverse('contact_detail', args=[doc.id])}">View profile →</a>
+                </div>
+                """
+                for doc in qs
             ])
-            bot_reply = "Here are the matching doctors:\n" + results
+            bot_reply = (
+                "Here are the matching doctors:<div class=\"chat-card-list\">"
+                f"{cards_html}"
+                "</div>"
+            )
         else:
             bot_reply = "No doctors match your request."
 
